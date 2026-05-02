@@ -29,7 +29,8 @@ data_dir = Path(__file__).parent / "data"
 rules_path = data_dir / "rules.txt"
 facts_path = data_dir / "facts.txt"
 
-parsed_facts = parser.split_file(facts_path)
+backward_chaining_parsed_facts = parser.split_file(facts_path)
+forward_chaining_parsed_facts = parser.split_file(facts_path)
 parsed_rules = parser.split_file(rules_path)
 
 rule = parser.Rule()
@@ -37,7 +38,7 @@ rule.split_rule(parsed_rules[0])
 
 facts = parser.facts_base()
 
-for sent in parsed_facts:
+for sent in backward_chaining_parsed_facts:
     facts.add_fact(sent)
 
 rules = {}
@@ -61,10 +62,10 @@ def main_menu():
     choice = input("Enter your choice: ")
     clear_screen()
     if choice == '1':
-        result = backward_chaining(rules, parsed_facts, "citrus_fruit")
+        result = backward_chaining(rules, backward_chaining_parsed_facts, "citrus_fruit")
         print(f"Backward Chaining Result for 'citrus_fruit': {result}")
     elif choice == '2':
-        facts, result = forward_chaining(rules, parsed_facts, "citrus_fruit")
+        result = forward_chaining(rules, forward_chaining_parsed_facts, "citrus_fruit")
         print(f"\nFinal Facts: {facts}")
         print(f"Forward Chaining Result for 'citrus_fruit': {result}")
     elif choice == '3':
