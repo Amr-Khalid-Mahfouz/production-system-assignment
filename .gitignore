@@ -1,0 +1,12 @@
+# PyCharm specific
+.idea/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
