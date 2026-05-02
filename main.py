@@ -64,8 +64,9 @@ def main_menu():
         result = backward_chaining(rules, parsed_facts, "citrus_fruit")
         print(f"Backward Chaining Result for 'citrus_fruit': {result}")
     elif choice == '2':
-        result = forward_chaining(rules, parsed_facts)
-        print(f"Forward Chaining Result: {result}")
+        facts, result = forward_chaining(rules, parsed_facts, "citrus_fruit")
+        print(f"\nFinal Facts: {facts}")
+        print(f"Forward Chaining Result for 'citrus_fruit': {result}")
     elif choice == '3':
         show_rules(rules)
     elif choice == '4':
