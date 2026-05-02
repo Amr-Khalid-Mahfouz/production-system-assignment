@@ -11,4 +11,3 @@ IF perfumed AND color is red AND size is small AND seeds = 0 THEN fruit is straw
 IF diameter < 2 THEN size is small
 IF diameter > 10 THEN size is big
 IF diameter > 2 AND diameter < 10 THEN size is medium
-
