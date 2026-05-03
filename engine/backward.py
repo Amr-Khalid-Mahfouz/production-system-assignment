@@ -1,3 +1,14 @@
+cycle = 0
+
+def helper(facts, new_fact):
+    global cycle
+    print(f"\nCycle {cycle}:")
+    cycle += 1
+    print(f"Rule fired → {new_fact}")
+    facts.append(new_fact)
+    print(f"Current facts: {facts}")
+    print()
+
 def isGoal(facts, rules, rule, goal):
     """
     Recursively evaluates if a goal can be proven true based on given facts and rules.
@@ -15,7 +26,7 @@ def isGoal(facts, rules, rule, goal):
     for condition in rule.conditions:
         # Special case handling for a specific condition.
         if condition == 'diameter > 2':
-            facts.append(rule.conclusion)
+            helper(facts, rule.conclusion)
             return True
 
         # Handle rules with 'AND' operators (ALL conditions must be true)
@@ -29,14 +40,14 @@ def isGoal(facts, rules, rule, goal):
         else:
             # Recursively check the condition. If it's true, the rule is satisfied.
             if isGoal(facts, rules, rules.get(condition, 'False'), condition):
-                facts.append(rule.conclusion) # Add newly proven fact
+                helper(facts, rule.conclusion)
                 return True
             continue
     
     # If it was an 'AND' rule and we completed the loop without returning False, 
     # it means all conditions were met.
     if len(rule.operators) and rule.operators[0] == 'AND':
-        facts.append(rule.conclusion) # Add newly proven fact
+        helper(facts, rule.conclusion)
         return True
     
     # If it was an 'OR' rule and none of the conditions were met, it fails.
